@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Help Solve</title>
+
+<link rel="stylesheet" href="ishaq.css">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Dust effect canvas -->
+<canvas id="dust-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></canvas>
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen" class="loading-screen">
+  <div class="loading-content">
+    <img src="taji.png" alt="Taji" class="loading-taji" />
+    <h1>Help to Solve</h1>
+  </div>
+</div>
+
+<!-- SIDE NAVIGATION -->
+<nav class="side-nav">
+  <div class="nav-header">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="nav-logo">
+      <img src="logo.png" alt="logo">
+    </div>
+  </div>
+  
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <a href="#hero" class="nav-link active" data-section="hero">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9,22 9,12 15,12 15,22"></polyline>
+        </svg>
+        <span>Home</span>
+      </a>
+    </li>
+    
+    <li class="nav-item">
+      <a href="#about" class="nav-link" data-section="about">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        <span>About</span>
+      </a>
+    </li>
+    
+    <li class="nav-item">
+      <a href="#how-it-works" class="nav-link" data-section="how-it-works">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+        </svg>
+        <span>How It Works</span>
+      </a>
+    </li>
+    
+    <li class="nav-item">
+      <a href="#booking-form-section" class="nav-link" data-section="booking-form-section">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <span data-lang="nav-book-now">Book Now</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#testimonials" class="nav-link" data-section="testimonials">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span data-lang="nav-testimonials">Testimonials</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#contact" class="nav-link" data-section="contact">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16v16H4z"></path>
+          <path d="M4 8l8 5 8-5"></path>
+        </svg>
+        <span data-lang="nav-contact">Contact</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+<!-- HERO -->
+<section id="hero" class="hero">
+
+  <!-- LEFT SIDE -->
+  <div class="hero-text">
+
+    <h1>
+      We Help You Solve <br>
+      Customer Problems <br>
+      <span>Faster</span>
+    </h1>
+
+    <p>
+      Reliable, professional support when you need it most. We partner with businesses to deliver exceptional customer experiences.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#booking-form-section" id="heroBookBtn" class="primary-btn" data-lang="hero-book-appointment">Book an Appointment</a>
+    </div>
+
+  </div>
+
+  <!-- RIGHT SIDE IMAGE -->
+  <div class="hero-image">
+    <img src="taji.png" alt="support illustration">
+  </div>
+
+</section>
+
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about">
+  <div class="about-container">
+    
+    <h2>About Help to Solve</h2>
+    
+    <p class="about-description">
+      Help to Solve is a dedicated customer support partner for small businesses, entrepreneurs, 
+      and individuals. We combine deep expertise with a genuine passion for problem-solving to 
+      deliver support solutions that drive loyalty and growth.
+    </p>
+
+    <div class="about-cards">
+      
+      <!-- EXPERTISE CARD -->
+      <div class="about-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+        </div>
+        <h3>Expertise</h3>
+        <p>Years of experience in customer support management.</p>
+      </div>
+
+      <!-- RESPONSIVENESS CARD -->
+      <div class="about-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+            <polyline points="13 2 13 9 20 9"></polyline>
+          </svg>
+        </div>
+        <h3>Responsiveness</h3>
+        <p>Fast turnaround times when it matters most.</p>
+      </div>
+
+      <!-- SATISFACTION CARD -->
+      <div class="about-card">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </div>
+        <h3>Satisfaction</h3>
+        <p>We don't stop until your customers are happy.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- HOW IT WORKS SECTION -->
+<section id="how-it-works" class="how-it-works">
+  <div class="how-container">
+    
+    <h2>How It Works</h2>
+    <p class="how-description">Getting started is simple. Three easy steps to better support.</p>
+
+    <div class="how-steps">
+      
+      <!-- STEP 1 -->
+      <div class="step-card">
+        <div class="step-badge">01</div>
+        <div class="step-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <h3>Book an Appointment</h3>
+        <p>Choose a time that works for you and tell us about your needs.</p>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-card">
+        <div class="step-badge">02</div>
+        <div class="step-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </div>
+        <h3>We Analyze Your Issue</h3>
+        <p>Our team reviews your situation and crafts a tailored plan.</p>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-card">
+        <div class="step-badge">03</div>
+        <div class="step-icon-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 4s-.7 1.1-2 2.5c1.7-1.7 2-2.5 2-4.5 0-.5-.5-1-1-1-.6 0-1.6 1-2.5 2C16.9 3.2 14.6 2 12 2c-5.5 0-10 4-10 9s4.5 9 10 9 10-4 10-9c0-2-1-4-2-6l-1-3"></path>
+          </svg>
+        </div>
+        <h3>We Provide Fast Solutions</h3>
+        <p>We implement solutions quickly so you can get back to growing.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+<!-- BOOKING FORM SECTION -->
+<section id="booking-form-section" class="booking-form-section">
+  <div class="booking-container">
+    
+    <h2>Book an Appointment</h2>
+    <p class="booking-description">Fill in the form below and our team will get back to you promptly.</p>
+
+    <div class="form-wrapper">
+      <form id="bookingForm" class="booking-form" method="POST" action="https://formsubmit.co/info.helptosolve@gmail.com">
+        <!-- FormSubmit endpoint sends submissions to info.helptosolve@gmail.com -->
+        <input type="hidden" name="_subject" value="New Help to Solve Booking Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://your-site-url.com/thank-you.html">
+        
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="name" placeholder="John Doe" required>
+        </div>
+
+        <!-- Email Address -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required>
+        </div>
+
+        <!-- Type of Support Needed -->
+        <div class="form-group">
+          <label for="serviceType">Type of Support Needed</label>
+          <select id="serviceType" name="service" required>
+            <option value="">Select a service</option>
+            <option value="Customer Support">Customer Support</option>
+            <option value="Technical Support">Technical Support</option>
+            <option value="Long-Time Support">Billing Support</option>
+            <option value="General Inquiry">General Inquiry</option>
+          </select>
+        </div>
+
+        <!-- Preferred Date & Time -->
+        <div class="form-group">
+          <label for="dateTime">Preferred Date & Time</label>
+          <input type="datetime-local" id="dateTime" name="datetime" required>
+        </div>
+
+        <!-- Message (optional) -->
+        <div class="form-group">
+          <label for="message">Additional Details (Optional)</label>
+          <textarea id="message" name="message" placeholder="Tell us more about your needs..." rows="4"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Schedule Support</button>
+
+      </form>
+      
+      <div id="successMessage" class="success-message" style="display: none;">
+        <p>✓ Thank you! We've received your request and will be in touch soon.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- TESTIMONIALS SECTION -->
+<section id="testimonials" class="testimonials">
+  <div class="testimonials-container">
+    <h2 data-lang="testimonials-title">What Our Clients Say</h2>
+    <p class="testimonials-description" data-lang="testimonials-description">Trusted by businesses and entrepreneurs who value exceptional support.</p>
+
+    <div class="testimonial-cards">
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text" data-lang="testimonials-quote1">"Help to Solve transformed our customer support. Response times dropped by 60% and satisfaction scores went through the roof."</p>
+        <h4 data-lang="testimonials-name1">Sarah M.</h4>
+        <span data-lang="testimonials-role1">E-commerce Owner</span>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text" data-lang="testimonials-quote2">"Professional, reliable, and genuinely invested in our success. They feel like an extension of our own team."</p>
+        <h4 data-lang="testimonials-name2">David K.</h4>
+        <span data-lang="testimonials-role2">SaaS Founder</span>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text" data-lang="testimonials-quote3">"I was struggling to handle client inquiries alone. Help to Solve stepped in and everything became seamless."</p>
+        <h4 data-lang="testimonials-name3">Lisa R.</h4>
+        <span data-lang="testimonials-role3">Freelance Consultant</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact-section">
+  <div class="contact-container">
+    <h2 data-lang="contact-title">Get in Touch</h2>
+    <p class="contact-description" data-lang="contact-description">Have a question or ready to get started? We'd love to hear from you.</p>
+
+    <div class="contact-details">
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M4 4h16v16H4z"></path><path d="M4 8l8 5 8-5"></path></svg>
+        <a href="mailto:info.helptosolve@gmail.com">info.helptosolve@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2.01A19.79 19.79 0 0 1 2 5.18 2 2 0 0 1 4 3h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 10.91a16 16 0 0 0 6 6l1.26-1.26a2 2 0 0 1 2.1-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <a href="tel:+31685409600">+31 6 85409600</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div> <!-- End main-content -->
+
+<script>
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Smooth scroll from hero button to booking section
+  const heroBookBtn = document.getElementById('heroBookBtn');
+  if (heroBookBtn) {
+    heroBookBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetSection = document.querySelector('#booking-form-section');
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  }
+
+  // Active section highlighting on scroll
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navToggle = document.getElementById('navToggle');
+  const sideNav = document.querySelector('.side-nav');
+
+  function updateActiveSection() {
+    let current = '';
+    const threshold = window.innerHeight / 2;
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const top = rect.top;
+      const bottom = rect.bottom;
+
+      if (top <= threshold && bottom > threshold) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('data-section') === current) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveSection);
+  updateActiveSection(); // Call once on load
+
+  // Mobile navigation toggle
+  function closeNav() {
+    sideNav.classList.remove('open');
+    document.body.classList.remove('nav-open');
+  }
+
+  function openNav() {
+    sideNav.classList.add('open');
+    document.body.classList.add('nav-open');
+  }
+
+  navToggle.addEventListener('click', function() {
+    sideNav.classList.toggle('open');
+    document.body.classList.toggle('nav-open');
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      if (window.innerWidth <= 768) {
+        closeNav();
+      }
+    });
+  });
+
+  // Reveal animation on scroll
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('reveal');
+        
+        // Also animate cards inside
+        const cards = entry.target.querySelectorAll('.about-card, .step-card, .testimonial-card');
+        cards.forEach(card => {
+          card.classList.add('reveal');
+        });
+        
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe sections
+  const aboutSection = document.querySelector('.about');
+  const howSection = document.querySelector('.how-it-works');
+  const testimonialsSection = document.querySelector('.testimonials');
+  const bookingSection = document.querySelector('.booking-form-section');
+  
+  if (aboutSection) {
+    observer.observe(aboutSection);
+  }
+  if (howSection) {
+    observer.observe(howSection);
+  }
+  if (testimonialsSection) {
+    observer.observe(testimonialsSection);
+  }
+  if (bookingSection) {
+    observer.observe(bookingSection);
+  }
+
+  const contactSection = document.querySelector('.contact-section');
+  if (contactSection) {
+    observer.observe(contactSection);
+  }
+
+  // Word cycling animation for hero span
+  const heroSpan = document.querySelector('.hero-text span');
+  const words = ['Faster', 'Quickly', 'Efficiently', 'Reliably'];
+  let currentWordIndex = 0;
+  let currentLetterIndex = 0;
+  let isTyping = true;
+  let typingSpeed = 150; // milliseconds per letter
+  let erasingSpeed = 100; // milliseconds per letter
+  let pauseBetweenWords = 2000; // milliseconds to pause when word is complete
+
+  function typeWriter() {
+    const currentWord = words[currentWordIndex];
+    
+    if (isTyping) {
+      // Typing phase
+      if (currentLetterIndex < currentWord.length) {
+        heroSpan.textContent = currentWord.substring(0, currentLetterIndex + 1);
+        currentLetterIndex++;
+        setTimeout(typeWriter, typingSpeed);
+      } else {
+        // Word is complete, pause then start erasing
+        isTyping = false;
+        setTimeout(typeWriter, pauseBetweenWords);
+      }
+    } else {
+      // Erasing phase
+      if (currentLetterIndex > 0) {
+        heroSpan.textContent = currentWord.substring(0, currentLetterIndex - 1);
+        currentLetterIndex--;
+        setTimeout(typeWriter, erasingSpeed);
+      } else {
+        // Word is erased, move to next word
+        isTyping = true;
+        currentWordIndex = (currentWordIndex + 1) % words.length;
+        setTimeout(typeWriter, typingSpeed);
+      }
+    }
+  }
+
+  // Start the typing effect
+  setTimeout(typeWriter, 1000);
+
+  // Form submission handling
+  document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    // Formspree handles the submission, but we can add extra validation here
+    console.log('Form submitted');
+  });
+
+  // Loading screen transition
+  window.addEventListener('DOMContentLoaded', function() {
+    document.body.classList.add('loading-active');
+  });
+
+  window.addEventListener('load', function() {
+    const loader = document.getElementById('loading-screen');
+    if (loader) {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        document.body.classList.remove('loading-active');
+        setTimeout(() => {
+          loader.style.display = 'none';
+        }, 600);
+      }, 2200); // keep loader visible for 2.2s while animation plays
+    }
+  });
+
+  // Dust particle animation (canvas)
+  const dustCanvas = document.getElementById("dust-canvas");
+  const dustCtx = dustCanvas.getContext("2d");
+
+  let dustWidth, dustHeight;
+  let dustParticles = [];
+
+  /* Resize canvas to full screen */
+  function dustResize() {
+    dustWidth = dustCanvas.width = window.innerWidth;
+    dustHeight = dustCanvas.height = window.innerHeight;
+  }
+  window.addEventListener("resize", dustResize);
+  dustResize();
+
+  /* Particle constructor */
+  class DustParticle {
+    constructor() {
+      this.reset();
+    }
+
+    reset() {
+      this.x = Math.random() * dustWidth;
+      this.y = Math.random() * dustHeight;
+      this.size = Math.random() * 2 + 0.5; // subtle size
+      this.speedX = Math.random() * 0.3 + 0.1; // left → right
+      this.speedY = Math.random() * 0.1 - 0.05; // gentle float
+      this.opacity = Math.random() * 0.6 + 0.25;
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.x > dustWidth || this.y < 0 || this.y > dustHeight) {
+        this.reset();
+        this.x = -10;
+      }
+    }
+
+    draw() {
+      dustCtx.beginPath();
+      dustCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      dustCtx.fillStyle = `rgba(210, 200, 180, ${this.opacity})`;
+      dustCtx.fill();
+    }
+  }
+
+  /* Create particles */
+  function initDustParticles(count = 180) {
+    dustParticles = [];
+    for (let i = 0; i < count; i++) {
+      dustParticles.push(new DustParticle());
+    }
+  }
+
+  initDustParticles();
+
+  /* Dust animation loop */
+  function animateDust() {
+    dustCtx.clearRect(0, 0, dustWidth, dustHeight);
+
+    dustParticles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    requestAnimationFrame(animateDust);
+  }
+
+  animateDust();
+</script>
+
+</body>
+</html>
