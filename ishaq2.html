@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help To Solve - Professional Customer Support</title>
+  
+  <!-- Import Inter Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #1a1a1a;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* Colors and Background Patterns */
+    :root {
+      --color-rust: #be5129;
+      --color-rust-dark: #2a1a10;
+      --color-gold: #cfae64;
+      --color-teal: #1d6278;
+      --color-teal-hover: #154c5d;
+      --color-dark-card: #22252a;
+    }
+
+    /* Subtle isometric cube/hexagon grid for orange sections */
+    .bg-rust-pattern {
+      background-color: var(--color-rust);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 0 L80 20 L80 60 L40 80 L0 60 L0 20 Z' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='1'/%3E%3Cpath d='M40 0 L40 80' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='1'/%3E%3Cpath d='M0 20 L80 60' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='1'/%3E%3Cpath d='M0 60 L80 20' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='1'/%3E%3C/svg%3E");
+      transition: background-color 1.4s ease;
+    }
+
+    /* Subtle grid overlay for gold sections */
+    .bg-gold-pattern {
+      background-color: var(--color-gold);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='none' stroke='rgba(0,0,0,0.02)' stroke-width='1'/%3E%3C/svg%3E");
+    }
+
+    /* Parallax Card-Stacking Layout */
+    section {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 100px 40px 40px 40px;
+    }
+
+    /* Z-Index sequence for card-overlap effect */
+    #home { z-index: 1; }
+    #about { z-index: 2; }
+    #how-it-works-sec { z-index: 3; }
+    #book { z-index: 4; }
+    #contact { z-index: 5; }
+
+    /* ===================== Intro / Boot Sequence ===================== */
+    /* Hero starts darkened; JS removes .intro-active once the boot sequence finishes */
+    #home.intro-active {
+      background-color: var(--color-rust-dark);
+    }
+
+    #home.intro-active .bg-rust-pattern-overlay {
+      opacity: 0;
+    }
+
+    /* Hero copy + button stay hidden/dim until boot completes */
+    .hero-reveal {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+      pointer-events: none;
+    }
+
+    .hero-reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Nav stays hidden/dim until boot completes (transform combined with centering transform below) */
+    .nav-container {
+      opacity: 0;
+      transition: opacity 0.9s ease, transform 0.9s ease;
+      pointer-events: none;
+    }
+
+    .nav-container.revealed {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Eyes-off / eyes-on robot crossfade */
+    .boot-robot-stack {
+      position: relative;
+      width: 220px;
+      height: 220px;
+    }
+
+    .boot-robot-stack img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+    }
+
+    #robot-eyes-off {
+      opacity: 1;
+      transition: opacity 1s ease;
+    }
+
+    #robot-eyes-on {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #robot-eyes-off.eyes-off-hidden {
+      opacity: 0;
+    }
+
+    #robot-eyes-on.eyes-on-visible {
+      opacity: 1;
+    }
+
+    /* ===================== Nav Bar Wizard ===================== */
+    .nav-container {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background-color: rgba(50, 25, 15, 0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      width: max-content;
+      max-width: 90%;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-item {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .nav-item:hover {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-item.active {
+      color: #ffffff;
+      background-color: var(--color-teal);
+    }
+
+    /* Common Typography & Title styling */
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: left;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .section-title.centered {
+      text-align: center;
+    }
+
+    .underline-bar {
+      width: 140px;
+      height: 4px;
+      background-color: var(--color-teal);
+      margin-bottom: 20px;
+    }
+
+    .underline-bar.centered {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-desc {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 40px;
+      text-align: left;
+      font-weight: 400;
+      max-width: 600px;
+    }
+
+    .section-desc.centered {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Section 1: Hero Home */
+    #home .hero-content {
+      text-align: center;
+      max-width: 800px;
+      z-index: 10;
+    }
+
+    #home h1 {
+      font-size: 3.8rem;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    #home p {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 32px;
+    }
+
+    .btn-outline-teal {
+      display: inline-block;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 600;
+      border: 2px solid var(--color-teal);
+      background-color: rgba(29, 98, 120, 0.15);
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-outline-teal:hover {
+      background-color: var(--color-teal);
+      box-shadow: 0 4px 15px rgba(29, 98, 120, 0.4);
+    }
+
+    .hero-robot-container {
+      margin-top: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Robot images: circular background removed, transparent/contain only */
+    .robot-img {
+      width: 220px;
+      height: 220px;
+      object-fit: contain;
+      background-color: transparent;
+    }
+
+    /* Section 2: About */
+    #about {
+      color: #ffffff;
+    }
+
+    #about .about-header {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .about-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .about-card {
+      background-color: var(--color-teal);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .about-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .about-card p {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .about-robot-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Section 3: How It Works Scroll Pin Setup */
+    #how-it-works-sec {
+      position: relative;
+      height: 250vh; /* Set generous heights to allow trigger scroll room */
+      padding: 0;
+    }
+
+    .how-it-works-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 40px 40px 40px;
+    }
+
+    .how-it-works-header {
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 20px;
+    }
+
+    .how-it-works-content {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .how-it-works-robot {
+      display: flex;
+      justify-content: center;
+    }
+
+    .dialog-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Dialogue Speech Bubble Style */
+    .dialog-bubble {
+      position: relative;
+      background-color: var(--color-teal);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .dialog-bubble.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Dialogue Tail pointing towards the robot on the left */
+    .dialog-bubble::after {
+      content: '';
+      position: absolute;
+      left: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 8px 12px 8px 0;
+      border-style: solid;
+      border-color: transparent var(--color-teal) transparent transparent;
+      display: block;
+      width: 0;
+    }
+
+    .dialog-bubble h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .dialog-bubble p {
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Section 4: Book an Appointment Form */
+    .form-container {
+      background-color: var(--color-dark-card);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 620px;
+      padding: 32px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .form-group label span {
+      color: var(--color-gold);
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background-color: #ffffff;
+      border: 1px solid #dcdcdc;
+      border-radius: 6px;
+      color: #22252a;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--color-teal);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--color-teal);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      padding: 14px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--color-teal-hover);
+    }
+
+    /* Section 5: Contact Us */
+    .contact-pills {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .contact-pill {
+      background-color: var(--color-teal);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: background-color 0.2s;
+    }
+
+    .contact-pill:hover {
+      background-color: var(--color-teal-hover);
+    }
+
+    /* ===================== Responsive Design ===================== */
+
+    /* ---- Tablet / small laptop (≤ 1024px): loosen up the widest desktop layout ---- */
+    @media (max-width: 1024px) {
+      .about-grid {
+        grid-template-columns: 1fr 0.9fr 1fr;
+        gap: 24px;
+      }
+
+      .how-it-works-content {
+        gap: 36px;
+      }
+
+      #home h1 {
+        font-size: 3.1rem;
+      }
+    }
+
+    /* ---- Mobile (≤ 768px): stack everything, switch to a static document flow ---- */
+    @media (max-width: 768px) {
+      /* Stack layout on smaller screens to avoid overlapping cramped cards */
+      section {
+        position: relative !important;
+        height: auto !important;
+        min-height: 100vh;
+        padding: 96px 20px 48px 20px;
+      }
+
+      #how-it-works-sec {
+        height: auto !important;
+        padding: 96px 20px 48px 20px;
+      }
+
+      .how-it-works-sticky {
+        position: relative !important;
+        height: auto !important;
+        min-height: 0;
+        padding: 0;
+      }
+
+      /* Nav: shrink padding, font size, and item spacing so 4 links fit comfortably */
+      .nav-container {
+        top: 14px;
+        padding: 8px;
+        max-width: 94%;
+      }
+
+      .nav-links {
+        gap: 2px;
+      }
+
+      .nav-item {
+        font-size: 0.72rem;
+        padding: 7px 11px;
+      }
+
+      .section-title {
+        font-size: 1.9rem;
+      }
+
+      .section-desc {
+        font-size: 0.98rem;
+        margin-bottom: 28px;
+      }
+
+      .underline-bar {
+        width: 90px;
+      }
+
+      /* Hero */
+      #home h1 {
+        font-size: 2.2rem;
+        letter-spacing: -0.5px;
+      }
+
+      #home p {
+        font-size: 1.05rem;
+        margin-bottom: 24px;
+      }
+
+      .boot-robot-stack,
+      .boot-robot-stack img,
+      .robot-img {
+        width: 170px;
+        height: 170px;
+      }
+
+      .hero-robot-container {
+        margin-top: 24px;
+      }
+
+      .about-grid, .how-it-works-content {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .about-column {
+        order: 2;
+        gap: 16px;
+      }
+
+      .about-robot-center {
+        order: 1;
+      }
+
+      .about-card {
+        padding: 20px;
+      }
+
+      /* Force elements visible on mobile instead of scroll-tied */
+      .dialog-bubble {
+        opacity: 1 !important;
+        transform: none !important;
+        padding: 16px 18px;
+      }
+
+      .dialog-bubble::after {
+        left: 50%;
+        top: -12px;
+        transform: translateX(-50%) rotate(90deg);
+      }
+
+      .how-it-works-robot {
+        margin-bottom: 8px;
+      }
+
+      /* Form */
+      .form-container {
+        padding: 22px;
+        border-radius: 14px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        margin-bottom: 0;
+      }
+
+      /* Prevent iOS Safari from auto-zooming on input focus */
+      .form-input, .form-select, .form-textarea {
+        font-size: 16px;
+        padding: 12px 14px;
+      }
+
+      .contact-pills {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 14px;
+      }
+
+      .contact-pill {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+        font-size: 0.85rem;
+        padding: 12px 16px;
+        word-break: break-word;
+        box-sizing: border-box;
+      }
+    }
+
+    /* ---- Small phones (≤ 420px): tighten further ---- */
+    @media (max-width: 420px) {
+      .nav-container {
+        padding: 6px;
+      }
+
+      .nav-item {
+        font-size: 0.66rem;
+        padding: 6px 8px;
+      }
+
+      #home h1 {
+        font-size: 1.85rem;
+      }
+
+      #home p {
+        font-size: 0.95rem;
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+
+      .boot-robot-stack,
+      .boot-robot-stack img,
+      .robot-img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .btn-outline-teal {
+        padding: 11px 22px;
+        font-size: 0.88rem;
+      }
+
+      section {
+        padding: 88px 16px 40px 16px;
+      }
+
+      #how-it-works-sec {
+        padding: 88px 16px 40px 16px;
+      }
+
+      .form-container {
+        padding: 16px;
+      }
+    }
+
+    /* ---- Respect reduced-motion preferences across all breakpoints ---- */
+    @media (prefers-reduced-motion: reduce) {
+      .bg-rust-pattern,
+      .hero-reveal,
+      .nav-container,
+      #robot-eyes-off,
+      #robot-eyes-on,
+      .dialog-bubble {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blurred Navigation Wizard (hidden until boot sequence completes) -->
+  <nav class="nav-container" id="mainNav">
+    <ul class="nav-links">
+      <li><a href="#home" class="nav-item active" data-short="Home">1. Home</a></li>
+      <li><a href="#about" class="nav-item" data-short="About">2. About</a></li>
+      <li><a href="#how-it-works" class="nav-item" data-short="How it works">3. How it works</a></li>
+      <li><a href="#book" class="nav-item" data-short="Book">4. Book an appointment</a></li>
+    </ul>
+  </nav>
+
+  <!-- Section 1: Hero / Home -->
+  <section id="home" class="bg-rust-pattern intro-active">
+    <div class="hero-content">
+
+      <!-- Boot sequence robot: eyes-off image crossfades into eyes-on image -->
+      <div class="hero-robot-container">
+        <div class="boot-robot-stack">
+          <img id="robot-eyes-off" src="tajioff.png" alt="Robot booting up" class="robot-img">
+          <img id="robot-eyes-on" src="ishaq2photos/taji.png" alt="Robot ready to help" class="robot-img">
+        </div>
+      </div>
+
+      <!-- Headline, copy, and CTA stay hidden until boot completes -->
+      <h1 class="hero-reveal" id="heroTitle">We Help You Solve Customer Problems</h1>
+      <p class="hero-reveal" id="heroDesc">Reliable, professional support when you need it most.</p>
+      <a href="#book" class="btn-outline-teal hero-btn hero-reveal" id="heroBtn">Book an appointment</a>
+    </div>
+  </section>
+
+  <!-- Section 2: About -->
+  <section id="about" class="bg-gold-pattern">
+    <div class="about-header">
+      <h2 class="section-title">About Help To Solve</h2>
+      <div class="underline-bar"></div>
+      <p class="section-desc">A dedicated customer support partner combining deep expertise with genuine care.</p>
+    </div>
+
+    <div class="about-grid">
+      <!-- Left Cards -->
+      <div class="about-column">
+        <div class="about-card">
+          <h3>Expertise</h3>
+          <p>We have built a professional portfolio across years of experience in technical support field.</p>
+        </div>
+        <div class="about-card">
+          <h3>Passion</h3>
+          <p>We combine deep expertise with a genuine passion for problem-solving to deliver support solutions that drive loyalty and growth.</p>
+        </div>
+      </div>
+
+      <!-- Center Robot forming a Heart Placeholder -->
+      <div class="about-robot-center">
+        <img src="tajilove.png" alt="About Robot Placeholder" class="robot-img">
+      </div>
+
+      <!-- Right Cards -->
+      <div class="about-column">
+        <div class="about-card">
+          <h3>Responsiveness</h3>
+          <p>Quick and swift reactions to customer requests when needed the most.</p>
+        </div>
+        <div class="about-card">
+          <h3>Satisfaction</h3>
+          <p>We don't stop until we are certain that our customer is happy with the result.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: How it Works (Wrapper triggers scroll pin inside sticky) -->
+  <div id="how-it-works-sec" class="bg-rust-pattern">
+    <div class="how-it-works-sticky">
+      <div class="how-it-works-header">
+        <h2 class="section-title">How it works</h2>
+        <div class="underline-bar"></div>
+        <p class="section-desc">Getting started is simple. It only takes 3 steps.</p>
+      </div>
+
+      <div class="how-it-works-content">
+        <!-- Thumbs-up robot Placeholder -->
+        <div class="how-it-works-robot">
+          <img src="TAJITHUMBSUP.png" alt="How It Works Robot Placeholder" class="robot-img">
+        </div>
+
+        <!-- Scroll-Triggered Speech Dialogue Boxes -->
+        <div class="dialog-steps">
+          <div class="dialog-bubble" id="step1">
+            <h3>1. Book An Appointment</h3>
+            <p>Choose a time that works for you and tell us about your needs.</p>
+          </div>
+          <div class="dialog-bubble" id="step2">
+            <h3>2. We Analyze your issue</h3>
+            <p>Our team reviews your situation and crafts a tailored plan.</p>
+          </div>
+          <div class="dialog-bubble" id="step3">
+            <h3>3. We come up with solutions</h3>
+            <p>We implement solutions quickly so you can get back to growing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Book An Appointment -->
+  <section id="book" class="bg-gold-pattern">
+    <h2 class="section-title centered">Book an appointment</h2>
+    <div class="underline-bar centered"></div>
+    <p class="section-desc centered">Fill in the form below and our team will get back to you promptly.</p>
+
+    <div class="form-container">
+      <form id="bookingForm" class="booking-form" method="POST" action="https://formsubmit.co/info.helptosolve@gmail.com">
+        <input type="hidden" name="_subject" value="New Help to Solve Booking Request">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://your-site-url.com/thank-you.html">
+
+        <div class="form-group">
+          <label for="fullname">Full Name <span>*</span></label>
+          <input type="text" id="fullname" name="name" class="form-input" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span>*</span></label>
+          <input type="email" id="email" name="email" class="form-input" placeholder="john@company.com" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="support-type">Type of Support Needed</label>
+            <select id="support-type" name="service" class="form-select" required>
+              <option value="">Select a service</option>
+              <option value="Customer Support">Customer Support</option>
+              <option value="Technical Support">Technical Support</option>
+              <option value="Billing Support">Billing Support</option>
+              <option value="General Inquiry">General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="datetime">Preferred Date & Time</label>
+            <input type="datetime-local" id="datetime" name="datetime" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="details">Additional Details</label>
+          <textarea id="details" name="message" class="form-textarea" placeholder="Please describe the issue in detail..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Schedule Support &rarr;
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Section 5: Contact Us / Footer -->
+  <section id="contact" class="bg-rust-pattern">
+    <h2 class="section-title centered">Contact Us</h2>
+    <div class="underline-bar centered"></div>
+    <p class="section-desc centered">Have a question or ready to get started? We'd love to hear from you.</p>
+
+    <div class="contact-pills">
+      <a href="mailto:info.helptosolve@gmail.com" class="contact-pill">info.helptosolve@gmail.com</a>
+      <a href="tel:+31617011360" class="contact-pill">+31617011360</a>
+    </div>
+  </section>
+
+  <script>
+    // ===================== Responsive Nav Labels =====================
+    // On narrow screens, swap full nav labels ("1. Book an appointment") for
+    // short ones ("Book") so the pill never wraps or overflows horizontally.
+    (function () {
+      const navItemEls = document.querySelectorAll('.nav-item');
+      const fullLabels = Array.from(navItemEls).map(el => el.textContent);
+      const breakpoint = window.matchMedia('(max-width: 480px)');
+
+      function applyLabels() {
+        navItemEls.forEach((el, i) => {
+          el.textContent = breakpoint.matches ? el.dataset.short : fullLabels[i];
+        });
+      }
+
+      applyLabels();
+      breakpoint.addEventListener('change', applyLabels);
+    })();
+
+    // ===================== Boot / Intro Sequence =====================
+    // 1. Page loads dark, robot eyes off.
+    // 2. After a short pause, eyes turn on (crossfade) and background fades to its normal color.
+    // 3. Nav, headline, description, and button fade in once the background finishes transitioning.
+    window.addEventListener('DOMContentLoaded', () => {
+      const homeSection = document.getElementById('home');
+      const eyesOff = document.getElementById('robot-eyes-off');
+      const eyesOn = document.getElementById('robot-eyes-on');
+      const nav = document.getElementById('mainNav');
+      const revealEls = document.querySelectorAll('.hero-reveal');
+
+      // Respect users who prefer reduced motion: skip straight to the resolved state.
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (prefersReducedMotion) {
+        homeSection.classList.remove('intro-active');
+        eyesOff.classList.add('eyes-off-hidden');
+        eyesOn.classList.add('eyes-on-visible');
+        nav.classList.add('revealed');
+        revealEls.forEach(el => el.classList.add('revealed'));
+        return;
+      }
+
+      // Step 1: brief pause on the dark, eyes-off state so it registers as a deliberate "booting" moment.
+      setTimeout(() => {
+        // Step 2: eyes turn on and background warms up to its normal rust color, simultaneously.
+        eyesOff.classList.add('eyes-off-hidden');
+        eyesOn.classList.add('eyes-on-visible');
+        homeSection.classList.remove('intro-active');
+
+        // Step 3: once the background/eyes transition is mostly done, reveal nav + hero copy + button.
+        setTimeout(() => {
+          nav.classList.add('revealed');
+          revealEls.forEach(el => el.classList.add('revealed'));
+        }, 900);
+      }, 900);
+    });
+
+    // Elements Selection
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = [
+      document.getElementById('home'),
+      document.getElementById('about'),
+      document.getElementById('how-it-works-sec'),
+      document.getElementById('book')
+    ];
+
+    const howItWorksSection = document.getElementById('how-it-works-sec');
+    const bubbles = [
+      document.getElementById('step1'),
+      document.getElementById('step2'),
+      document.getElementById('step3')
+    ];
+
+    // Scroll Logic for Nav Wizard and Interactive Dialogue bubbles
+    window.addEventListener('scroll', () => {
+      const scrollPos = window.scrollY;
+      const viewHeight = window.innerHeight;
+
+      // 1. Wizard Indicator Highlight
+      let currentActiveIndex = 0;
+      sections.forEach((sec, index) => {
+        const rect = sec.getBoundingClientRect();
+        // Check if the section is currently active within view thresholds
+        if (rect.top <= viewHeight * 0.4 && rect.bottom >= viewHeight * 0.4) {
+          currentActiveIndex = index;
+        }
+      });
+
+      // Maintain final nav element state at absolute bottom scroll
+      if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
+        currentActiveIndex = 3;
+      }
+
+      navItems.forEach((item, index) => {
+        if (index === currentActiveIndex) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      // 2. Individual Dialogue Bubbles Animation (How It Works)
+      const rect3 = howItWorksSection.getBoundingClientRect();
+      const totalScrollable = rect3.height - viewHeight;
+      const currentScroll = -rect3.top;
+
+      if (currentScroll >= 0 && currentScroll <= totalScrollable) {
+        const progress = currentScroll / totalScrollable;
+
+        // Custom progressive thresholds for bubble triggers (0.0 to 1.0 span)
+        if (progress > 0.1) {
+          bubbles[0].classList.add('visible');
+        } else {
+          bubbles[0].classList.remove('visible');
+        }
+
+        if (progress > 0.45) {
+          bubbles[1].classList.add('visible');
+        } else {
+          bubbles[1].classList.remove('visible');
+        }
+
+        if (progress > 0.8) {
+          bubbles[2].classList.add('visible');
+        } else {
+          bubbles[2].classList.remove('visible');
+        }
+      } else if (rect3.top > 0) {
+        // Scrolled above section
+        bubbles.forEach(b => b.classList.remove('visible'));
+      } else if (rect3.bottom < viewHeight) {
+        // Scrolled below section
+        bubbles.forEach(b => b.classList.add('visible'));
+      }
+    });
+
+    // Custom Scroll Handling for Anchor Clicks
+    document.querySelectorAll('.nav-item, .hero-btn').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId.charAt(0) !== '#') return;
+
+        e.preventDefault();
+
+        let targetElement = null;
+        if (targetId === '#how-it-works') {
+          targetElement = document.getElementById('how-it-works-sec');
+        } else {
+          targetElement = document.querySelector(targetId);
+        }
+
+        if (!targetElement) {
+          targetElement = document.getElementById(targetId.slice(1));
+        }
+
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          window.location.hash = targetId;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
